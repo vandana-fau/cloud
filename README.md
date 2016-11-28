@@ -1,56 +1,106 @@
-# Overview of the App #
-
-This is a Node.js app that uses the following cloud services:
-
--   MySQL Database
-
-This app demonstrates how to connect to a MySQL database on IBM BlueMix from a Node.js app. 
-Simply upload a line-separated file of text (e.g. tweets), and it will add each line to MySQL.
-
-Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
-
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/ibmjstart/bluemix-node-mysql-uploader.git)
-
-Enjoy! (note, it may take minute or so for the app to start)
-
-___
-
-### [Alternative] Deploying the App Via the Command-Line ###
-
-#### Prerequisites ####
-
-Before we begin, we first need to install the [**cf**](https://github.com/cloudfoundry/cli/releases) command line tool that will be used to upload and manage your application. If you've previously installed an older version of the cf tool, make sure you are now using v6 of cf by passing it the -v flag:
-
-    cf -v
-
-#### Steps ####
-In the terminal, go into the root directory, and follow these steps.
-
-1. Login to Bluemix.
-
-   | *usage:*   | `$ cf login [-a API_URL] [-o ORG] [-s SPACE]`|
-   |------------|----------------------------------------------|
-   | *example:* | `$ cf login -a https://api.ng.bluemix.net`   |
-
-2. Create an instance of the mySQL service, giving it the name "mysql-database" in the last arguement. Note, if a different name is desired, then the manifest.yml file needs to be changed accordingly.
-
-   | *usage:*   | `$ cf create-service SERVICE PLAN SERVICE_INSTANCE`|
-   |------------|----------------------------------------------------|
-   | *example:* | `$ cf create-service mysql 100 mysql-database`     |
-
-3. From the root directory that contains this *README.md* file, push the app like below.  Be sure to give your app a unique APP_NAME to be used for its hostname. For instance the example below would result in http://myupload-&lt;username&gt;.ng.bluemix.net.
-
-   | *usage:*   | `$ cf push APP_NAME`                  |
-   |------------|----------------------------------|
-   | *example:* | `$ cf push myupload-<username>`  |
-
-Congratulations, the app should be running on Bluemix.
-   
-___
-
-### License ###
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-
-     http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+A "Hello World" server in node.js sample for Bluemix.
+  
+  This repo contains a complete sample of a node.js program that you can deploy
+ -on IBM's [BlueMix](https://bluemix.net/) PaaS, which is based on
+ +on IBM's [Bluemix](https://bluemix.net/) PaaS, which is based on
+  the [Cloud Foundry open source project](http://cloudfoundry.org/).
+  
+  Before jumping into the code, make sure you have an IBM ID, by
+  registering at the
+  [IBM ID registration](https://www.ibm.com/account/profile/us?page=reg)
+ -page.  You will need the IBM ID to login to BlueMix from the command line.
+ +page.  You will need the IBM ID to login to Bluemix from the command line.
+  
+  You will also need to install the `cf` command-line tool, available
+  here:
+ @@ -97,11 +97,11 @@ When you visit the above url the content will be Hello World
+  
+  
+  
+ -logging into BlueMix
+ +logging into Bluemix
+  --------------------------------------------------------------------------------
+  
+  Now that you have your IBM ID and the `cf` command-line tool (see above),
+ -you can log into BlueMix and the deploy your app.
+ +you can log into Bluemix and the deploy your app.
+  
+  First you should tell the `cf` command which environment you want to operate
+  with, with the `cf api` command:
+ @@ -117,11 +117,11 @@ You should see the following output:
+      Not logged in. Use 'cf login' to log in.
+      No org or space targeted, use 'cf target -o ORG -s SPACE'
+  
+ -Note that as long as you only ever interact with the BlueMix environment with the
+ +Note that as long as you only ever interact with the Bluemix environment with the
+  `cf` command (and not any other CloudFoundry environments), you won't have to
+  run the `cf api` command again.
+  
+ -To login to BlueMix, use the following command:
+ +To login to Bluemix, use the following command:
+  
+      cf login
+  
+ @@ -149,21 +149,21 @@ When complete, you should see the following:
+  
+  
+  
+ -deploying to BlueMix
+ +deploying to Bluemix
+  --------------------------------------------------------------------------------
+  
+ -You can deploy an application to BlueMix with the `cf push` command.
+ +You can deploy an application to Bluemix with the `cf push` command.
+  
+ -Use the following command to have the application deployed to BlueMix:
+ +Use the following command to have the application deployed to Bluemix:
+  
+      cf push
+  
+  `cf push` will read the default manifest file `manifest.yml` for some
+  default values of options related to your application.
+  
+  Note that in the documentation below, the string `${random-word}` is a
+ -place-holder for a random string that BlueMix will create, so that you
+ -will have a unique hostname running within BlueMix.
+ +place-holder for a random string that Bluemix will create, so that you
+ +will have a unique hostname running within Bluemix.
+  
+  After running the `cf push` command above, you should see the following output:
+  
+ @@ -221,7 +221,7 @@ At this point, your application is running and you can visit it on the urls
+      https://hello-node${random-word}.ng.bluemix.net
+  
+  If you'd like to continue to play with the server by changing the code, use
+ -the following command when you are ready to push the new version to BlueMix:
+ +the following command when you are ready to push the new version to Bluemix:
+  
+      cf push
+  
+ @@ -275,7 +275,7 @@ locally.
+  
+  `.cfignore`
+  
+ -List of file patterns that should **NOT** be uploaded to BlueMix.
+ +List of file patterns that should **NOT** be uploaded to Bluemix.
+  
+  See the Cloud Foundry doc
+  *[Prepare to Deploy an Application](http://docs.cloudfoundry.org/devguide/deploy-apps/prepare-to-deploy.html)*
+ @@ -286,7 +286,7 @@ In this case, the contents of the file are:
+      node_modules
+  
+  This indicates the node modules you installed with `npm install` will **NOT** be
+ -uploaded to BlueMix.  When your app is "staged" (ie, built on BlueMix during
+ +uploaded to Bluemix.  When your app is "staged" (ie, built on Bluemix during
+  `cf push`), an
+  `npm install` will be run there to install the required modules.  By avoiding
+  sending your node modules when you push your app, your app will be uploaded
+ @@ -330,7 +330,7 @@ Standard package.json file for node packages.  You will need this file for two
+  reasons:
+  
+  * identify your node package dependencies during `npm install`
+ -* identify to BlueMix that this directory contains a node.js application
+ +* identify to Bluemix that this directory contains a node.js application
+  
+  See the npm doc
+  *[package.json](https://npmjs.org/doc/json.html)*
